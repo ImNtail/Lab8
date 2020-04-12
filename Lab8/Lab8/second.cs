@@ -42,7 +42,7 @@ namespace Lab8 {
                     else
                         Console.WriteLine("There is no such substring.");
                     Console.WriteLine("Count of comparisons: " + countOfComparisons);
-                    Console.WriteLine("Work time: " + workTime.TotalMilliseconds + "\n");
+                    Console.WriteLine("Work time: " + workTime.TotalMilliseconds + " milliseconds\n");
                     countOfComparisons = 0;
                     workTime = TimeSpan.Parse("0");
                     index = 0;
@@ -55,9 +55,18 @@ namespace Lab8 {
             countOfComparisons = 0;
             DateTime startTime = DateTime.Now;
             Console.WriteLine("\nSimple search");
-
-
-
+            for (int i = 0; i < text.Length - substring.Length; i++)
+            {
+                for (int j = 0; substring[j] == text[i + j]; j++, countOfComparisons++)
+                    if (j == substring.Length - 1)
+                    {
+                        index = i;
+                        break;
+                    }
+                countOfComparisons++;
+                if (index == i)
+                    break;
+            }
             DateTime endTime = DateTime.Now;
             workTime = endTime - startTime;
         }
