@@ -41,8 +41,7 @@ namespace Lab8
             string indexOfNumber = String.Empty;
             int length = 100000;
             int[] array = new int[length];
-            string path = @"C:\Lab7_2\sorted.dat";
-            using (StreamReader readArray = new StreamReader(new FileStream(path, FileMode.OpenOrCreate)))
+            using (StreamReader readArray = new StreamReader(new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "sorted.dat"), FileMode.OpenOrCreate)))
             {
                 try
                 {
