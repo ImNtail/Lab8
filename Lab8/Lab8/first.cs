@@ -16,7 +16,6 @@ namespace Lab8
         static void shellSort(int[] array, int length, out ulong countOfTranspositions)
         {
             countOfTranspositions = 0;
-            DateTime startTime = DateTime.Now;
             int[] steps = { 57, 23, 10, 4, 1 };
             foreach (int step in steps)
                 for (int i = step; i < length; i++)
@@ -91,23 +90,31 @@ namespace Lab8
                 {
                     case 1:
                         Console.WriteLine("\nLinear search:\n");
-                        linearSearch(array, numberToSearch, indexOfNumber, countOfComparisons, workTime);
+                        linearSearch(array, numberToSearch, out indexOfNumber, out countOfComparisons, out workTime);
                         break;
                     case 2:
                         Console.WriteLine("\nBinary search:\n");
-                        binarySearch(array, numberToSearch, indexOfNumber, countOfComparisons, workTime);
+                        binarySearch(array, numberToSearch, out indexOfNumber, out countOfComparisons, out workTime);
                         break;
                     case 3:
                         Console.WriteLine("\nInterp search:\n");
-                        interpSearch(array, numberToSearch, indexOfNumber, countOfComparisons, workTime);
+                        interpSearch(array, numberToSearch, out indexOfNumber, out countOfComparisons, out workTime);
                         break;
                     default:
                         break;
                 }
+                if (indexOfNumber != String.Empty)
+                    Console.WriteLine("Indexes of number: {0}", indexOfNumber);
+                else
+                    Console.WriteLine("There are no such number in array");
+                Console.WriteLine("Count of comparisons: {0}", countOfComparisons);
+                Console.WriteLine("Work time: {0}\n", workTime);
             }
         }
-        public static void linearSearch(int[] array, int numberToSearch, string indexOfNumber, ulong countOfComparisons, TimeSpan workTime)
+        public static void linearSearch(int[] array, int numberToSearch, out string indexOfNumber, out ulong countOfComparisons, out TimeSpan workTime)
         {
+            indexOfNumber = String.Empty;
+            countOfComparisons = 0;
             DateTime startTime = DateTime.Now;
             for (int i = 0; i < array.Length; i++)
             {
@@ -117,15 +124,11 @@ namespace Lab8
             }
             DateTime endTime = DateTime.Now;
             workTime = endTime - startTime;
-            if (indexOfNumber != String.Empty)
-                Console.WriteLine("Indexes of number: {0}", indexOfNumber);
-            else
-                Console.WriteLine("There are no such number in array");
-            Console.WriteLine("Count of comparisons: {0}", countOfComparisons);
-            Console.WriteLine("Work time: {0}\n", workTime);
         }
-        public static void binarySearch(int[] array, int numberToSearch, string indexOfNumber, ulong countOfComparisons, TimeSpan workTime)
+        public static void binarySearch(int[] array, int numberToSearch, out string indexOfNumber, out ulong countOfComparisons, out TimeSpan workTime)
         {
+            indexOfNumber = String.Empty;
+            countOfComparisons = 0;
             int left = 0, right = array.Length - 1;
             DateTime startTime = DateTime.Now;
             while (right >= left)
@@ -141,15 +144,11 @@ namespace Lab8
             }
             DateTime endTime = DateTime.Now;
             workTime = endTime - startTime;
-            if (indexOfNumber != String.Empty)
-                Console.WriteLine("Indexes of number: {0}", indexOfNumber);
-            else
-                Console.WriteLine("There are no such number in array");
-            Console.WriteLine("Count of comparisons: {0}", countOfComparisons);
-            Console.WriteLine("Work time: {0}\n", workTime);
         }
-        public static void interpSearch(int[] array, int numberToSearch, string indexOfNumber, ulong countOfComparisons, TimeSpan workTime)
+        public static void interpSearch(int[] array, int numberToSearch, out string indexOfNumber, out ulong countOfComparisons, out TimeSpan workTime)
         {
+            indexOfNumber = String.Empty;
+            countOfComparisons = 0;
             int left = 0, right = array.Length - 1;
             DateTime startTime = DateTime.Now;
             while (right >= left)
@@ -173,12 +172,6 @@ namespace Lab8
             }
             DateTime endTime = DateTime.Now;
             workTime = endTime - startTime;
-            if (indexOfNumber != String.Empty)
-                Console.WriteLine("Indexes of number: {0}", indexOfNumber);
-            else
-                Console.WriteLine("There are no such number in array");
-            Console.WriteLine("Count of comparisons: {0}", countOfComparisons);
-            Console.WriteLine("Work time: {0}\n", workTime);
         }
     }
 }
